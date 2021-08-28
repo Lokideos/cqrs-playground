@@ -6,14 +6,17 @@ class WebApp < Hanami::API
   end
 
   get "/users" do
-    'List of users'
+    json(App['queries.list'].call.map(&:to_h))
   end
 
   get "/users/:id" do
-    'information about specific user'
+    json(App['queries.show'].call(id: params[:id]).to_h)
   end
 
-  post "/posts" do
-    'A new user was created'
+  post "/users" do
+    command = Commands::CreateUser.new(full_name: params.dig(:user, :full_name))
+    result = App['commands_handler.base'].call(command)
+
+    json(result.to_h)
   end
 end
