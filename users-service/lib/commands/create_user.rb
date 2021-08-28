@@ -1,8 +1,9 @@
 module Commands
-  class CreateUser
-    include Import[user_repo: 'write_model.repositories.users']
+  class CreateUser < Dry::Struct
+    attribute :full_name, Types::String.optional
 
-    def call(_payload)
+    def self.command_name
+      'create_user'
     end
   end
 end
