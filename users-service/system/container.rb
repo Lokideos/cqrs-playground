@@ -4,6 +4,9 @@ require 'dry/system/container'
 
 class App < Dry::System::Container
   configure do |config|
-    config.component_dirs.add 'lib'
+    config.name = :main
+    config.auto_register = %w[lib]
   end
+
+  load_paths!('lib')
 end
