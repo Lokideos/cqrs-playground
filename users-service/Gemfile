@@ -6,13 +6,13 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 ruby '2.7.2'
 
-gem 'dry-system'
+gem 'dry-system', '0.17.0'
 gem "hanami-api"
 gem 'thin'
-
-gem 'rom'
-gem 'rom-sql'
-gem 'rom-repository'
+gem 'zeitwerk'
+gem 'rom', '~> 5.2'
+gem 'rom-sql', '~> 3.2'
+gem 'rom-repository', '~> 5.2'
 gem 'pg'
 
 gem 'dotenv'
