@@ -3,7 +3,6 @@ module CommandsHandler
     include Import[create_user_command: 'commands_handler.create_user']
 
     def call(command)
-      p command
       case command
       when Commands::CreateUser then create_user_command.call(command.to_h)
       else
