@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+ruby '2.7.2'
+
+gem 'dry-system', '0.17.0'
+gem "hanami-api"
+gem 'thin'
+gem 'rom', '~> 5.2'
+gem 'rom-sql', '~> 3.2'
+gem 'rom-repository', '~> 5.2'
+gem 'pg'
+
+gem 'dotenv'
+gem 'rake'
+
+gem 'dry-struct'
+gem 'dry-monads'
+
+gem 'waterdrop'
+
+group :development do
+  gem 'ruby_jard'
+end

@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/boot'
+
+puts "Loading #{ENV['APP_ENV']} environment (Hanami)"
+
+require 'irb'
+IRB.start(__FILE__)
