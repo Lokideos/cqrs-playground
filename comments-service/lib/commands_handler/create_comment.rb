@@ -1,8 +1,8 @@
-module EventHandlers
-  class CommentCreated
+module CommandsHandler
+  class CreateComment
     include Import[comments_repo: 'write_model.repositories.comments']
 
-    def call
+    def call(text: nil)
     end
   end
 end
