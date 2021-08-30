@@ -1,7 +1,9 @@
 module Events
   class CommentCreated < Dry::Struct
     attribute :id, Types::Integer
-    attribute :text, Types::String
+    attribute :post_id, Types::Integer
+    attribute :body, Types::String
+    attribute :author_id, Types::Integer
     attribute :created_at, Types::Time
     attribute :updated_at, Types::Time
 

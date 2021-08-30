@@ -7,10 +7,10 @@ module CommandsHandler
 
       new_comment = comments_repo.create(payload)
 
-      # event = Events::CommentCreated.new(new_comment.to_h)
-      # producer.call(event: event, topic: 'comment-topic')
-      #
-      # new_comment
+      event = Events::CommentCreated.new(new_comment.to_h)
+      producer.call(event: event, topic: 'comment-topic')
+
+      new_comment
     end
   end
 end
