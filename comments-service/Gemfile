@@ -20,7 +20,8 @@ gem 'rake'
 gem 'dry-struct'
 gem 'dry-monads'
 
-gem 'waterdrop'
+gem 'waterdrop', '~> 1.4'
+gem 'karafka', '~> 1.4'
 
 group :development do
   gem 'ruby_jard'

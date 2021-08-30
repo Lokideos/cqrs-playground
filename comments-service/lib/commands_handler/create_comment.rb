@@ -1,6 +1,9 @@
 module CommandsHandler
   class CreateComment
-    include Import[comments_repo: 'write_model.repositories.comments']
+    include Import[
+              comments_repo: 'write_model.repositories.comments',
+              producer: 'kafka_producer'
+            ]
 
     def call(payload)
       return {} if payload[:body] == ''
