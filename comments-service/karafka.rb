@@ -25,22 +25,18 @@ APP_LOADER.eager_load
 
 class CommentTopicConsumer < Karafka::BaseConsumer
   def consume
-    puts '*' * 80
-
     params_batch.each do |message|
       puts
-      puts message.payload
-      # puts
-      # puts message.payload
-      #
-      # App['event_handlers.comment_created'].call(message.payload)
+      puts message
+
+      App['event_handlers.comment_created'].call(message.payload)
     end
   end
 end
 
 class JsonDeserializer
   def call(message)
-    JSON.parse(message.payload, symbolize_names: true)
+    JSON.parse(message.raw_payload, symbolize_names: true)
   end
 end
 
@@ -76,7 +72,7 @@ class KarafkaApp < Karafka::App
       topic :'comment-topic' do
         consumer CommentTopicConsumer
 
-        # deserializer JsonDeserializer.new
+        deserializer JsonDeserializer.new
       end
     end
   end

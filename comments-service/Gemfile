@@ -23,6 +23,8 @@ gem 'dry-monads'
 gem 'waterdrop', '~> 1.4'
 gem 'karafka', '~> 1.4'
 
+gem 'faraday'
+
 group :development do
   gem 'ruby_jard'
 end
