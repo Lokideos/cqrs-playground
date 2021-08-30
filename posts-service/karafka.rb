@@ -27,6 +27,31 @@ class PostTopicConsumer < Karafka::BaseConsumer
   def consume
     params_batch.each do |message|
       puts
+      puts "========= Post Event ========="
+      puts message
+
+      App['event_handlers.post_created'].call(message.payload)
+    end
+  end
+end
+
+class UserTopicConsumer < Karafka::BaseConsumer
+  def consume
+    params_batch.each do |message|
+      puts
+      puts "========= User Event ========="
+      puts message
+
+      App['event_handlers.user_created'].call(message.payload)
+    end
+  end
+end
+
+class CommentTopicConsumer < Karafka::BaseConsumer
+  def consume
+    params_batch.each do |message|
+      puts
+      puts "========= Comment Event ========="
       puts message
 
       App['event_handlers.comment_created'].call(message.payload)
@@ -68,9 +93,25 @@ class KarafkaApp < Karafka::App
   # )
 
   consumer_groups.draw do
-    consumer_group :post_service_comment_group do
+    consumer_group :posts_group do
       topic :'post-topic' do
         consumer PostTopicConsumer
+
+        deserializer JsonDeserializer.new
+      end
+    end
+
+    consumer_group :users_group do
+      topic :'user-topic' do
+        consumer UserTopicConsumer
+
+        deserializer JsonDeserializer.new
+      end
+    end
+
+    consumer_group :comments_group do
+      topic :'comment-topic' do
+        consumer CommentTopicConsumer
 
         deserializer JsonDeserializer.new
       end
