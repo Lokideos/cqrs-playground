@@ -6,7 +6,7 @@ module CommandsHandler
             ]
 
     def call(payload)
-      return {} if payload[:body] == ''
+      return {} if posts_repo.find_by_title(payload[:title])
 
       new_post = posts_repo.create(payload)
 
