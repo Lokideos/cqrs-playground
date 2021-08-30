@@ -6,7 +6,7 @@ class WebApp < Hanami::API
   end
 
   get "/posts" do
-    json(App['queries.list'].all.map(&:to_h))
+    json(App['queries.list'].call.map(&:to_h))
   end
 
   get "/posts/:id" do
