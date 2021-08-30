@@ -14,7 +14,7 @@ class WebApp < Hanami::API
   end
 
   post "/comments" do
-    command = Commands::CreateComment.new.call(text: params.dig(:comment, :text))
+    command = Commands::CreateComment.new(params[:comment])
     result = App['commands_handler.base'].call(command)
 
     json(result.to_h)
