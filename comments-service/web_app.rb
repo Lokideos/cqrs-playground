@@ -9,8 +9,8 @@ class WebApp < Hanami::API
     json(App['queries.list'].call.map(&:to_h))
   end
 
-  get "/comments/:id" do
-    json(App['queries.show'].call(id: params[:id]).to_h)
+  get "/posts/:post_id/comments" do
+    json(App['queries.list_for_post'].call(post_id: params[:post_id]).map(&:to_h))
   end
 
   post "/comments" do
