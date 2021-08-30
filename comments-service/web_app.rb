@@ -6,14 +6,17 @@ class WebApp < Hanami::API
   end
 
   get "/comments" do
-    'List of comments'
+    json(App['queries.list'].call.map(&:to_h))
   end
 
   get "/comments/:id" do
-    'List of comments'
+    json(App['queries.show'].call(id: params[:id]).to_h)
   end
 
   post "/comments" do
-    'A new comment was created'
+    command = Commands::CreateComment.new.call(text: params.dig(:comment, :text))
+    result = App['commands_handler.base'].call(command)
+
+    json(result.to_h)
   end
 end
