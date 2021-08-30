@@ -14,7 +14,7 @@ module WriteModel
                }
 
       def find_by_title(title)
-        root.where(title: title).exists?
+        root.where(title: title).one
       end
     end
   end
