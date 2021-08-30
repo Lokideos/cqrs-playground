@@ -6,14 +6,17 @@ class WebApp < Hanami::API
   end
 
   get "/posts" do
-    'List of posts'
+    json(App['queries.list'].all.map(&:to_h))
   end
 
   get "/posts/:id" do
-    'information about specific post'
+    json(App['queries.show'].call(id: params[:id]).to_h)
   end
 
   post "/posts" do
-    'A new post was created'
+    command = Commands::CreatePost.new(params[:post])
+    result = App['commands_handler.base'].call(command)
+
+    json(result.to_h)
   end
 end
